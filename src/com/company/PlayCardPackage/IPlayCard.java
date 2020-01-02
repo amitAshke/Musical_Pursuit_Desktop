@@ -1,4 +1,4 @@
-package com.example.dbcourse.Musical_Pursuit.backend.PlayCardPackage;
+package com.company.PlayCardPackage;
 
 public interface IPlayCard {
 

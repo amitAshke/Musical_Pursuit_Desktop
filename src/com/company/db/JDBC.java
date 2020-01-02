@@ -1,4 +1,4 @@
-package org.musical_pursuit.services.db;
+package com.company.db;
 
 import java.io.*;
 import java.sql.*;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-import org.musical_pursuit.services.src.objects.Song;
+import com.company.objects.Song;
 import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
 
