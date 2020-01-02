@@ -1,6 +1,6 @@
-package com.example.dbcourse.Musical_Pursuit.backend;
+package com.company;
 
-import com.example.dbcourse.Musical_Pursuit.backend.PlayCardPackage.IPlayCard;
+import com.company.PlayCardPackage.IPlayCard;
 
 import java.util.Iterator;
 
