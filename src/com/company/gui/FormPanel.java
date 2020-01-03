@@ -1,8 +1,10 @@
 package com.company.gui;
-
+import com.company.Player;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,17 +16,15 @@ import javax.swing.border.Border;
 
 public class FormPanel extends JPanel {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private JLabel nameLabel;
-//    private JLabel occupationLabel;
     private JTextField nameField;
-//    private JTextField occupationField;
     private JButton okBtn;
+    private Player player = null;
 
     public FormPanel() {
+
         //each component has a default size
         Dimension dim = getPreferredSize();
 
@@ -89,5 +89,21 @@ public class FormPanel extends JPanel {
         // at the top-left corner of it's container
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(okBtn, gc);
+
+        okBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                if (!name.equals("")) {
+                     player = new Player(name);
+                }
+
+                if (player != null) {
+                    //todo: move to new window
+                    System.out.println("new player created: " + player.getName());
+                }
+
+            }
+        });
     }
 }
