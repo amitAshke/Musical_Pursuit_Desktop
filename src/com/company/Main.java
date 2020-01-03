@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.gui.GameWindow;
 import com.company.gui.MainMenu;
 
 import javax.swing.*;
@@ -13,7 +14,8 @@ public class Main {
 
             @Override
             public void run() {
-                MainMenu menu = new MainMenu();
+//                MainMenu menu = new MainMenu();
+                GameWindow game = new GameWindow();
             }
         }));
 

@@ -9,11 +9,8 @@ import javax.swing.JPanel;
 
 public class Toolbar extends JPanel implements ActionListener{
 
-    private static final long serialVersionUID = 1L;
     private JButton highscoreBtn;
 
-
-    private StringListener textListener;
 
     public Toolbar() {
         highscoreBtn = new JButton("High score");
@@ -25,9 +22,6 @@ public class Toolbar extends JPanel implements ActionListener{
         add(highscoreBtn);
     }
 
-    public void setStringListener(StringListener listener) {
-        this.textListener = listener;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -35,9 +29,7 @@ public class Toolbar extends JPanel implements ActionListener{
         JButton btnClicked = (JButton)e.getSource();
 
         if (btnClicked == highscoreBtn) {
-            if (textListener != null) {
-                textListener.textEmitted("Hello\n");
-            }
+           System.out.println("high score clicked!");
         }
     }
 }

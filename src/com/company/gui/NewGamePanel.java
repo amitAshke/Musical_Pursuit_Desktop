@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 
-public class FormPanel extends JPanel {
+public class NewGamePanel extends JPanel {
 
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class FormPanel extends JPanel {
     private JButton okBtn;
     private Player player = null;
 
-    public FormPanel() {
+    public NewGamePanel() {
 
         //each component has a default size
         Dimension dim = getPreferredSize();
@@ -56,7 +56,7 @@ public class FormPanel extends JPanel {
          */
         gc.weightx = 1;
         gc.weighty = 0.2;
-        gc.gridx = 0;
+        gc.gridx = 0; //
         gc.gridy = 0;
         gc.fill = GridBagConstraints.NONE;
         // the anchor method positions the content "inside" it's container
