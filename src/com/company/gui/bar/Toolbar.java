@@ -1,4 +1,4 @@
-package com.company.gui;
+package com.company.gui.bar;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ public class Toolbar extends JPanel implements ActionListener{
 
     private JButton highscoreBtn;
 
-
+    // todo: think what design pattern I can use so I can add many different btns
     public Toolbar() {
         highscoreBtn = new JButton("High score");
 

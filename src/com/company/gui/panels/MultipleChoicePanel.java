@@ -1,35 +1,40 @@
 package com.company.gui.panels;
 
-import com.company.PlayCardPackage.SingleAnswerPlayCard;
+import com.company.PlayCardPackage.MultipleChoicePlayCard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Collections;
+import java.util.List;
 
-public class SingleAnswerPanel extends BasePanel {
+public class MultipleChoicePanel extends BasePanel {
     private JLabel questionLabel;
     private JButton submitBtn;
-    private ArrayList<JRadioButton> optionsButtonsList;
-    private ButtonGroup optionsGroup;
+    private ArrayList<JCheckBox> optionsCheckBoxList;
     private boolean isAnswerCorrect;
-    private SingleAnswerPlayCard singleAnswerPlayCard;
+    private MultipleChoicePlayCard singleAnswerPlayCard;
 
-
-    public SingleAnswerPanel(SingleAnswerPlayCard singleAnswerPlayCard) {
-        super("Single Answer Play Card");
+    public MultipleChoicePanel(MultipleChoicePlayCard singleAnswerPlayCard) {
+        super("Multiple Choice Play card");
         this.singleAnswerPlayCard = singleAnswerPlayCard;
-        this.optionsButtonsList = new ArrayList<>();
+        this.optionsCheckBoxList = new ArrayList<>();
 
         questionLabel = new JLabel(singleAnswerPlayCard.getQuestion());
-        optionsGroup = new ButtonGroup();
-        for (String option : singleAnswerPlayCard.getOptions()) {
-            JRadioButton btn = new JRadioButton(option);
-            optionsButtonsList.add(btn);
-            optionsGroup.add(btn);
+        // add the correct and incorrect answers
+        for (String option : singleAnswerPlayCard.getCorrectAnswers()) {
+            JCheckBox btn = new JCheckBox(option);
+            optionsCheckBoxList.add(btn);
         }
+        for (String option : singleAnswerPlayCard.getIncorrectAnswers()) {
+            JCheckBox btn = new JCheckBox(option);
+            optionsCheckBoxList.add(btn);
+        }
+
+        //shuffle the order in the list
+        Collections.shuffle(optionsCheckBoxList);
         submitBtn = new JButton("Submit");
 
         setLayout(new GridBagLayout());
@@ -48,7 +53,7 @@ public class SingleAnswerPanel extends BasePanel {
         int gridY = 1;
 
         int count = 0;
-        for (JRadioButton rBtn : optionsButtonsList) {
+        for (JCheckBox rBtn : optionsCheckBoxList) {
             gc.weightx = 1;
             gc.weighty = 1;
             gc.gridx = gridX;
@@ -75,24 +80,24 @@ public class SingleAnswerPanel extends BasePanel {
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedBtnText = getSelectedButtonText(optionsGroup);
-                if (selectedBtnText != null)
-                    System.out.println("answer is: " + selectedBtnText);
-                else
+                List<String> userAnswersList = new ArrayList<>();
+                for(JCheckBox cb : optionsCheckBoxList) {
+                    if (cb.isSelected()) {
+                        userAnswersList.add(cb.getText());
+                    }
+                }
+
+                if (userAnswersList.size() != 0) {
+                   String joinUserAnswers = String.join(", ", userAnswersList);
+                   System.out.println("user answers: " + joinUserAnswers);
+                   //todo: compare with real answer adn add score accordingly
+                } else {
+                    //user did'nt selected anything
                     System.out.println("no answer");
+                }
+
+
             }
         });
-    }
-
-    public String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-
-        return null;
     }
 }

@@ -1,5 +1,8 @@
 package com.company.gui;
 
+import com.company.gui.bar.Toolbar;
+import com.company.gui.panels.NewGamePanel;
+
 import javax.swing.*;
 import java.awt.*;
 

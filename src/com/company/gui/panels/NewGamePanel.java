@@ -1,4 +1,4 @@
-package com.company.gui;
+package com.company.gui.panels;
 import com.company.Player;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 
-public class NewGamePanel extends JPanel {
+public class NewGamePanel extends BasePanel {
 
 
     private static final long serialVersionUID = 1L;
@@ -24,13 +24,7 @@ public class NewGamePanel extends JPanel {
     private Player player = null;
 
     public NewGamePanel() {
-
-        //each component has a default size
-        Dimension dim = getPreferredSize();
-
-        // set the size of the formPanel
-        dim.width = 250;
-        setPreferredSize(dim);
+        super("New Player");
 
         nameLabel = new JLabel("Name: ");
 //        occupationLabel = new JLabel("Occupation: ");
@@ -38,13 +32,6 @@ public class NewGamePanel extends JPanel {
         nameField = new JTextField(10);
 //        occupationField = new JTextField(10);
         okBtn = new JButton("OK");
-
-        /* each graphic element can have a border, with setBorder. In this case, the
-         * static method compoundBorder takes two border objects as parameters
-         */
-        Border innerBorder = BorderFactory.createTitledBorder("New Player");
-        Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
         setLayout(new GridBagLayout());
 
@@ -56,7 +43,7 @@ public class NewGamePanel extends JPanel {
          */
         gc.weightx = 1;
         gc.weighty = 0.2;
-        gc.gridx = 0; //
+        gc.gridx = 0;
         gc.gridy = 0;
         gc.fill = GridBagConstraints.NONE;
         // the anchor method positions the content "inside" it's container
