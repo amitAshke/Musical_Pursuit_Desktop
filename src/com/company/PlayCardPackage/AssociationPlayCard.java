@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class AssociationPlayCard implements IPlayCard{
 
-    private String question = "Choose the band that released the following songs/albums.";
+    private String question = "Choose the band that released the following songs.";
     private String[] options;
     private HashMap<String, Integer> associables;
 
