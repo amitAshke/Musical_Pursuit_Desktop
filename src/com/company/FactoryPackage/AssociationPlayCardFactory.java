@@ -1,7 +1,7 @@
-package com.company.FactoryPackage;
+package org.musical_pursuit.services.src.FactoryPackage;
 
 import java.util.HashMap;
-import com.company.PlayCardPackage.IPlayCard;
+import org.musical_pursuit.services.src.PlayCardPackage.IPlayCard;
 
 public class AssociationPlayCardFactory implements IPlayCardFactory{
 
@@ -10,9 +10,9 @@ public class AssociationPlayCardFactory implements IPlayCardFactory{
 
         /* Calling a function that build a query to send to the local database and receive 2 artists/bands. Lets call
         the return object "databaseOptions". These 2 "row" objects will only contain the name of artist/band that are
-        used as the
-        options. */
-        /* Calling a function that build a query with the previously received artst/band to send to the local database
+        used as the options. */
+
+        /* Calling a function that build a query with the previously received artist/band to send to the local database
         and receive 30 song/album. Lets call the return object "databaseAssociables". These 30 "row" objects will
         only contain the name of song/album and the name of the artist/band that they belong to. */
 
