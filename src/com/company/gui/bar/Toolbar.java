@@ -1,5 +1,9 @@
 package com.company.gui.bar;
 
+import com.company.commands.Command;
+import com.company.commands.CommandExecutor;
+import com.company.commands.CommandExecutorProxy;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,27 +13,34 @@ import javax.swing.JPanel;
 
 public class Toolbar extends JPanel implements ActionListener{
 
-    private JButton highscoreBtn;
+    private JButton btn;
+    private Command btnCommand;
+    private CommandExecutor commandExecutor;
 
-    // todo: think what design pattern I can use so I can add many different btns
-    public Toolbar() {
-        highscoreBtn = new JButton("High score");
+    public Toolbar(String btnText, CommandExecutor commandExecutor) {
+        this.btn = new JButton(btnText);
+        this.btn.addActionListener(this);
+        this.commandExecutor = commandExecutor;
 
-        highscoreBtn.addActionListener(this);
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        add(highscoreBtn);
+        add(btn);
     }
 
+    public void setBtnCommand(Command command) {
+        this.btnCommand = command;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         JButton btnClicked = (JButton)e.getSource();
 
-        if (btnClicked == highscoreBtn) {
-           System.out.println("high score clicked!");
+        if (btnClicked == btn) {
+           if (btnCommand != null && commandExecutor != null) {
+               commandExecutor.runCommand(this.btnCommand);
+           }
         }
     }
 }
