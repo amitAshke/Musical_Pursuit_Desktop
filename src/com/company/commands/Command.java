@@ -7,5 +7,9 @@ public abstract class Command {
         this.isAdminCommand = isAdminCommand;
     }
 
+    public boolean isAdminCommand() {
+        return isAdminCommand;
+    }
+
     public abstract void execute();
 }

@@ -24,7 +24,8 @@ public class CommandExecutorProxy implements CommandExecutor {
         } else {
             //here we need to check if the user is admin, and if the command is for admins only.
             //maybe we can use downcast
-            return;
+            if (!cmd.isAdminCommand())
+                this.executor.runCommand(cmd);
         }
     }
 }
