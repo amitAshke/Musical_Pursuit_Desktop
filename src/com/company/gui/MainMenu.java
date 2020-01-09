@@ -1,6 +1,9 @@
 package com.company.gui;
 
-import com.company.gui.bar.Toolbar;
+import com.company.Player;
+import com.company.commands.CommandExecutor;
+import com.company.commands.CommandExecutorProxy;
+import com.company.gui.bar.*;
 import com.company.gui.panels.NewGamePanel;
 
 import javax.swing.*;
@@ -12,14 +15,23 @@ public class MainMenu extends JFrame {
 
     private Toolbar toolbar;
     private NewGamePanel newGamePanel;
+    private ToolbarEngineer toolbarEngineer;
+    private CommandExecutor executor;
+    private Player player;
 
     public MainMenu() {
         super("Musical Pursuit");
-
+        this.toolbarEngineer = new ToolbarEngineer();
+        this.executor = new CommandExecutorProxy(); // default executorProxy
+        this.player = new Player();
         setLayout(new BorderLayout());
 
-        toolbar = new Toolbar();
-        newGamePanel = new NewGamePanel();
+        //create high score ToolBar using builder
+        ToolbarBuilder barBuilder = new HighScoreBarBuilder(this.executor);
+        toolbarEngineer.setToolBarBuilder(barBuilder);
+        toolbarEngineer.constructToolBar();
+        toolbar = this.toolbarEngineer.getToolBar();
+        newGamePanel = new NewGamePanel(player);
 
 //        btn.addActionListener(new ActionListener() {
 //
@@ -37,5 +49,7 @@ public class MainMenu extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+
     }
 }

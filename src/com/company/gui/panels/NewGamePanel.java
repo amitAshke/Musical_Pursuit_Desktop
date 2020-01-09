@@ -14,17 +14,17 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 
-public class NewGamePanel extends BasePanel {
+public class NewGamePanel extends BasePanel implements ActionListener {
 
 
-    private static final long serialVersionUID = 1L;
     private JLabel nameLabel;
     private JTextField nameField;
     private JButton okBtn;
-    private Player player = null;
+    private Player player;
 
-    public NewGamePanel() {
+    public NewGamePanel(Player player) {
         super("New Player");
+        this.player = player;
 
         nameLabel = new JLabel("Name: ");
 //        occupationLabel = new JLabel("Occupation: ");
@@ -32,6 +32,7 @@ public class NewGamePanel extends BasePanel {
         nameField = new JTextField(10);
 //        occupationField = new JTextField(10);
         okBtn = new JButton("OK");
+        okBtn.addActionListener(this::actionPerformed);
 
         setLayout(new GridBagLayout());
 
@@ -77,20 +78,19 @@ public class NewGamePanel extends BasePanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(okBtn, gc);
 
-        okBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
-                if (!name.equals("")) {
-                     player = new Player(name);
-                }
+    }
 
-                if (player != null) {
-                    //todo: move to new window
-                    System.out.println("new player created: " + player.getName());
-                }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btnClicked = (JButton)e.getSource();
 
+        if (btnClicked == okBtn) {
+            String name = nameField.getText();
+            if (!name.equals("")) {
+                this.player.setName(name);
+                System.out.println("new player changed name: " + player.getName());
             }
-        });
+
+        }
     }
 }

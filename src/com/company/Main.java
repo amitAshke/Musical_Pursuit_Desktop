@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.commands.CommandExecutor;
+import com.company.commands.CommandExecutorImpl;
+import com.company.commands.CommandExecutorProxy;
 import com.company.gui.GameWindow;
 import com.company.gui.MainMenu;
 
@@ -14,8 +17,8 @@ public class Main {
 
             @Override
             public void run() {
-//                MainMenu menu = new MainMenu();
-                GameWindow game = new GameWindow();
+                MainMenu menu = new MainMenu();
+//                GameWindow game = new GameWindow();
             }
         }));
 
