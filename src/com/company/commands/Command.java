@@ -1,5 +1,11 @@
 package com.company.commands;
 
-public interface Command {
-    void execute();
+public abstract class Command {
+    private boolean isAdminCommand;
+
+    public Command(boolean isAdminCommand) {
+        this.isAdminCommand = isAdminCommand;
+    }
+
+    public abstract void execute();
 }

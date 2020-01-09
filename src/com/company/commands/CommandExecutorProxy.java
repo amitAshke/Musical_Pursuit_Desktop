@@ -4,12 +4,18 @@ public class CommandExecutorProxy implements CommandExecutor {
 
     private boolean isAdmin;
     private CommandExecutor executor;
-
+    private String ADMIN_USER = "Admin";
     public CommandExecutorProxy(String username) {
-        String ADMIN_USER = "Admin";
         if (username.equals(ADMIN_USER)) isAdmin = true;
-        this.executor = null; //insert here CommandExecutorImpl
+        this.executor = new CommandExecutorImpl(); //insert here CommandExecutorImpl
     }
+
+    public CommandExecutorProxy() {
+        //default constructor make regular user, not admin
+        this.isAdmin = false;
+        this.executor = new CommandExecutorImpl(); //insert here CommandExecutorImpl
+    }
+
 
     @Override
     public void runCommand(Command cmd){
