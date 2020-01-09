@@ -19,7 +19,7 @@ public class Toolbar extends JPanel implements ActionListener{
 
     public Toolbar(String btnText, CommandExecutor commandExecutor) {
         this.btn = new JButton(btnText);
-        this.btn.addActionListener(this);
+        this.btn.addActionListener(this::actionPerformed);
         this.commandExecutor = commandExecutor;
 
 

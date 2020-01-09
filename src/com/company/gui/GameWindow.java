@@ -5,6 +5,7 @@ import com.company.PlayCardPackage.SingleAnswerPlayCard;
 import com.company.Player;
 import com.company.Round;
 import com.company.commands.CommandExecutor;
+import com.company.commands.CommandExecutorImpl;
 import com.company.gui.bar.ShowAnswerBarBuilder;
 import com.company.gui.bar.ToolbarBuilder;
 import com.company.gui.bar.ToolbarEngineer;
@@ -27,9 +28,10 @@ public class GameWindow extends JFrame {
     private CommandExecutor executor;
     private ToolbarEngineer toolbarEngineer;
 
-    public GameWindow(CommandExecutor executor) {
+    public GameWindow(Player player) {
         super("Musical Pursuit");
-        this.executor = executor;
+        this.player = player;
+        this.executor = new CommandExecutorImpl();
         setLayout(new BorderLayout());
         this.toolbarEngineer = new ToolbarEngineer();
 

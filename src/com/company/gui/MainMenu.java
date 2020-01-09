@@ -33,15 +33,6 @@ public class MainMenu extends JFrame {
         toolbar = this.toolbarEngineer.getToolBar();
         newGamePanel = new NewGamePanel(player);
 
-//        btn.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                textPanel.appendText("Button clicked again\n");
-//
-//            }
-//        });
 
         add(toolbar, BorderLayout.NORTH);
         add(newGamePanel, BorderLayout.CENTER);
@@ -49,7 +40,6 @@ public class MainMenu extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
 
     }
 }
