@@ -31,7 +31,6 @@ public class NewGamePanel extends BasePanel implements ActionListener {
 //        occupationLabel = new JLabel("Occupation: ");
         // 10 is the default width in characters
         nameField = new JTextField(10);
-//        occupationField = new JTextField(10);
         okBtn = new JButton("OK");
         okBtn.addActionListener(this::actionPerformed);
 

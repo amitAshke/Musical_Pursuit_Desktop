@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class MultipleChoicePanel extends BasePanel {
-    private JLabel questionLabel;
-    private JButton submitBtn;
     private ArrayList<JCheckBox> optionsCheckBoxList;
     private boolean isAnswerCorrect;
     private MultipleChoicePlayCard singleAnswerPlayCard;
@@ -22,7 +20,7 @@ public class MultipleChoicePanel extends BasePanel {
         this.singleAnswerPlayCard = singleAnswerPlayCard;
         this.optionsCheckBoxList = new ArrayList<>();
 
-        questionLabel = new JLabel(singleAnswerPlayCard.getQuestion());
+        JLabel questionLabel = new JLabel(singleAnswerPlayCard.getQuestion());
         // add the correct and incorrect answers
         for (String option : singleAnswerPlayCard.getCorrectAnswers()) {
             JCheckBox btn = new JCheckBox(option);
@@ -35,7 +33,7 @@ public class MultipleChoicePanel extends BasePanel {
 
         //shuffle the order in the list
         Collections.shuffle(optionsCheckBoxList);
-        submitBtn = new JButton("Submit");
+        JButton submitBtn = new JButton("Submit");
 
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
