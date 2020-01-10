@@ -5,11 +5,9 @@ import com.company.PlayCardPackage.SingleAnswerPlayCard;
 import com.company.Player;
 import com.company.Round;
 import com.company.commands.CommandExecutor;
-import com.company.commands.CommandExecutorImpl;
 import com.company.gui.bar.ShowAnswerBarBuilder;
 import com.company.gui.bar.ToolbarBuilder;
 import com.company.gui.bar.ToolbarEngineer;
-import com.company.gui.bar.Toolbar;
 import com.company.gui.panels.MultipleChoicePanel;
 import com.company.gui.panels.SingleAnswerPanel;
 
@@ -24,19 +22,18 @@ public class GameWindow extends JFrame {
     private Player player;
     private Round round;
     private SingleAnswerPanel singleAnswerPanel;
-    private Toolbar toolbar;
     private CommandExecutor executor;
     private ToolbarEngineer toolbarEngineer;
 
-    public GameWindow(Player player) {
+    public GameWindow(Player player, CommandExecutor executor) {
         super("Musical Pursuit");
         this.player = player;
-        this.executor = new CommandExecutorImpl();
+        this.executor = executor;
         setLayout(new BorderLayout());
         this.toolbarEngineer = new ToolbarEngineer();
 
-        String ans[] = {"one", "two", "three", "five"};
-        String incorectAns[] = {"six", "seven", "eight"};
+        String[] ans = {"one", "two", "three", "five"};
+        String[] incorectAns = {"six", "seven", "eight"};
         SingleAnswerPlayCard question = new SingleAnswerPlayCard("what num is this: 5", "five", ans);
 
         //create answer ToolBar using builder

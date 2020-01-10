@@ -1,16 +1,16 @@
 package com.company.gui.panels;
 import com.company.Player;
+import com.company.commands.CommandExecutor;
+import com.company.commands.CommandExecutorProxy;
+import com.company.gui.GameWindow;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 
@@ -21,6 +21,7 @@ public class NewGamePanel extends BasePanel implements ActionListener {
     private JTextField nameField;
     private JButton okBtn;
     private Player player;
+    private CommandExecutor commandExecutorProxy;
 
     public NewGamePanel(Player player) {
         super("New Player");
@@ -80,6 +81,10 @@ public class NewGamePanel extends BasePanel implements ActionListener {
 
     }
 
+    public void setCommandExecutorProxy(CommandExecutor p) {
+        this.commandExecutorProxy = p;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton btnClicked = (JButton)e.getSource();
@@ -88,7 +93,13 @@ public class NewGamePanel extends BasePanel implements ActionListener {
             String name = nameField.getText();
             if (!name.equals("")) {
                 this.player.setName(name);
+                this.commandExecutorProxy = new CommandExecutorProxy(name);
                 System.out.println("new player changed name: " + player.getName());
+                //closing the window and opening a game window
+                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                topFrame.setVisible(false);
+                new GameWindow(player, commandExecutorProxy);
+                topFrame.dispose();
             }
 
         }

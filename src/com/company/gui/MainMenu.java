@@ -32,6 +32,7 @@ public class MainMenu extends JFrame {
         toolbarEngineer.constructToolBar();
         toolbar = this.toolbarEngineer.getToolBar();
         newGamePanel = new NewGamePanel(player);
+        newGamePanel.setCommandExecutorProxy(this.executor);
 
 
         add(toolbar, BorderLayout.NORTH);
