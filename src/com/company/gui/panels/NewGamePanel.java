@@ -1,5 +1,7 @@
 package com.company.gui.panels;
 import com.company.Player;
+import com.company.Round;
+import com.company.TestQuestion;
 import com.company.commands.CommandExecutor;
 import com.company.commands.CommandExecutorProxy;
 import com.company.gui.GameWindow;
@@ -97,7 +99,8 @@ public class NewGamePanel extends BasePanel implements ActionListener {
                 //closing the window and opening a game window
                 JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 topFrame.setVisible(false);
-                new GameWindow(player, commandExecutorProxy);
+                // todo: create a round from question from dataBase.
+                new GameWindow(player, commandExecutorProxy, new Round(TestQuestion.getFakeQuestions()));
                 topFrame.dispose();
             }
 

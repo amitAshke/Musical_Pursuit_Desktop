@@ -1,6 +1,7 @@
 package com.company.gui;
 
 import com.company.PlayCardPackage.AssociationPlayCard;
+import com.company.PlayCardPackage.IPlayCard;
 import com.company.PlayCardPackage.MultipleChoicePlayCard;
 import com.company.PlayCardPackage.SingleAnswerPlayCard;
 import com.company.Player;
@@ -16,6 +17,7 @@ import com.company.gui.panels.SingleAnswerPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class GameWindow extends JFrame {
 
@@ -24,30 +26,19 @@ public class GameWindow extends JFrame {
 
     private Player player;
     private Round round;
-    private SingleAnswerPanel singleAnswerPanel;
+    private JPanel questionPanel;
     private CommandExecutor executor;
     private ToolbarEngineer toolbarEngineer;
+    private Iterator<IPlayCard> roundIterator;
 
-    public GameWindow(Player player, CommandExecutor executor) {
+    public GameWindow(Player player, CommandExecutor executor, Round round) {
         super("Musical Pursuit");
         this.player = player;
         this.executor = executor;
         setLayout(new BorderLayout());
         this.toolbarEngineer = new ToolbarEngineer();
-
-//        String[] ans = {"one", "two", "three", "five"};
-//        String[] incorectAns = {"six", "seven", "eight"};
-//        SingleAnswerPlayCard question = new SingleAnswerPlayCard("what num is this: 5", "five", ans);
-
-        String[] bandsOptions = {"U2", "The Killers"};
-        HashMap<String, Integer> associates = new HashMap<>();
-        associates.put("Mr. Brightside", 1);
-        associates.put("Human", 1);
-        associates.put("With Or without You", 0);
-        associates.put("Read My Mind", 1);
-        associates.put("every breaking wave", 0);
-        AssociationPlayCard question = new AssociationPlayCard(bandsOptions,associates);
-
+        this.round = round;
+        this.roundIterator = round.iterator();
 
         //create answer ToolBar using builder
         ToolbarBuilder barBuilder = new ShowAnswerBarBuilder(this.executor);
@@ -55,19 +46,54 @@ public class GameWindow extends JFrame {
         toolbarEngineer.constructToolBar();
         add(toolbarEngineer.getToolBar(), BorderLayout.NORTH);
 
-//        MultipleChoicePlayCard multipleChoice = new MultipleChoicePlayCard("what num is this: 5", incorectAns, ans);
-//        MultipleChoicePanel multipleChoicePanel = new MultipleChoicePanel(multipleChoice);
-//        add(multipleChoicePanel, BorderLayout.CENTER);
-
-//        singleAnswerPanel = new SingleAnswerPanel(question);
-//        add(singleAnswerPanel, BorderLayout.CENTER);
-
-        AssociationPanel associationPanel = new AssociationPanel(question);
-        add(associationPanel, BorderLayout.CENTER);
-
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        // add the first question
+        if(roundIterator.hasNext()) {
+            IPlayCard playCard = roundIterator.next();
+            questionPanel = getPanelByPlayCard(playCard);
+            if (questionPanel != null)
+                add(questionPanel, BorderLayout.CENTER);
+        }
     }
 
+    public void callNextQuestion() {
+        remove(this.questionPanel);
+        if(roundIterator.hasNext()) {
+            IPlayCard playCard = roundIterator.next();
+            questionPanel = getPanelByPlayCard(playCard);
+            if (questionPanel != null) {
+                add(questionPanel, BorderLayout.CENTER);
+                //make sure it will draw the new panel
+                this.validate();
+                this.repaint();
+            }
+        } else {
+            endSequence();
+        }
+
+    }
+
+    private void endSequence() {
+        System.out.println("end of game, score is " + player.getScore());
+        this.dispose();
+        new MainMenu();
+    }
+
+    public Iterator<IPlayCard> getRoundIterator() {
+        return roundIterator;
+    }
+
+    private JPanel getPanelByPlayCard(IPlayCard playCard) {
+        if (playCard instanceof AssociationPlayCard) {
+            return questionPanel = new AssociationPanel((AssociationPlayCard) playCard);
+        } else if (playCard instanceof SingleAnswerPlayCard) {
+            return questionPanel = new SingleAnswerPanel((SingleAnswerPlayCard) playCard);
+        } else if (playCard instanceof MultipleChoicePlayCard) {
+            return questionPanel = new MultipleChoicePanel((MultipleChoicePlayCard) playCard);
+        }
+        return null;
+    }
 }

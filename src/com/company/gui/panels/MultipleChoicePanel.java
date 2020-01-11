@@ -1,6 +1,7 @@
 package com.company.gui.panels;
 
 import com.company.PlayCardPackage.MultipleChoicePlayCard;
+import com.company.gui.GameWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,6 +90,7 @@ public class MultipleChoicePanel extends BasePanel {
                    String joinUserAnswers = String.join(", ", userAnswersList);
                    System.out.println("user answers: " + joinUserAnswers);
                    //todo: compare with real answer adn add score accordingly
+                    ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
                 } else {
                     //user did'nt selected anything
                     System.out.println("no answer");

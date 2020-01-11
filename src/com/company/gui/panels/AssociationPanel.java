@@ -1,6 +1,7 @@
 package com.company.gui.panels;
 
 import com.company.PlayCardPackage.AssociationPlayCard;
+import com.company.gui.GameWindow;
 import javafx.util.Pair;
 
 import javax.swing.*;
@@ -80,6 +81,7 @@ public class AssociationPanel extends BasePanel implements ActionListener {
         JButton btnClicked = (JButton)e.getSource();
         if (btnClicked == submitBtn) {
             System.out.println("end of associate level");
+            ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
         }
     }
 }

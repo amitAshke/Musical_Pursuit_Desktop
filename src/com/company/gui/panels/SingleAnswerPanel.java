@@ -1,6 +1,7 @@
 package com.company.gui.panels;
 
 import com.company.PlayCardPackage.SingleAnswerPlayCard;
+import com.company.gui.GameWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -76,10 +77,15 @@ public class SingleAnswerPanel extends BasePanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedBtnText = getSelectedButtonText(optionsGroup);
-                if (selectedBtnText != null)
+                if (selectedBtnText != null) {
+
                     System.out.println("answer is: " + selectedBtnText);
-                else
+                    ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
+                }
+                else {
                     System.out.println("no answer");
+                }
+
             }
         });
     }
