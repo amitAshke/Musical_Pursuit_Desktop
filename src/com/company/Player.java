@@ -1,6 +1,10 @@
 package com.company;
 
-public class Player {
+
+import com.company.observbale.Observable;
+import com.company.observbale.Observer;
+
+public class Player implements Observer {
     private String name;
     private int score;
 
@@ -26,5 +30,10 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        score += (int)arg;
     }
 }

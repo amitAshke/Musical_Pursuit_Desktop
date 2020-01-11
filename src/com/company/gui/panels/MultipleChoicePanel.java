@@ -13,7 +13,6 @@ import java.util.List;
 
 public class MultipleChoicePanel extends BasePanel {
     private ArrayList<JCheckBox> optionsCheckBoxList;
-    private boolean isAnswerCorrect;
     private MultipleChoicePlayCard singleAnswerPlayCard;
 
     public MultipleChoicePanel(MultipleChoicePlayCard singleAnswerPlayCard) {
@@ -87,9 +86,24 @@ public class MultipleChoicePanel extends BasePanel {
                 }
 
                 if (userAnswersList.size() != 0) {
-                   String joinUserAnswers = String.join(", ", userAnswersList);
-                   System.out.println("user answers: " + joinUserAnswers);
-                   //todo: compare with real answer adn add score accordingly
+                    int score = 0;
+                    for (String tryAnswer : userAnswersList) {
+                        boolean isCorrect = false;
+                        for (String realAnswer : singleAnswerPlayCard.getCorrectAnswers()) {
+                            if (realAnswer.equals(tryAnswer)) {
+                                isCorrect = true;
+                                break;
+                            }
+                        }
+                        if (isCorrect)
+                            score += 1;
+                        else
+                            score -= 1;
+                    }
+                    if (score > 0) {
+                        addScore(score);
+                    }
+
                     ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
                 } else {
                     //user did'nt selected anything

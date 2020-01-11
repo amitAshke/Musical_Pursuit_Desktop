@@ -50,6 +50,7 @@ public class AssociationPanel extends BasePanel implements ActionListener {
         // key is correct answer, value is user
         if (correctAnswerUserAnswer.getKey().equals(correctAnswerUserAnswer.getValue())) {
             System.out.println("well done! :)");
+            addScore(1);
         } else {
             System.out.println("incorrect :(");
         }

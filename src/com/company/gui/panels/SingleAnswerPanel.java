@@ -15,7 +15,6 @@ public class SingleAnswerPanel extends BasePanel {
     private JButton submitBtn;
     private ArrayList<JRadioButton> optionsButtonsList;
     private ButtonGroup optionsGroup;
-    private boolean isAnswerCorrect;
     private SingleAnswerPlayCard singleAnswerPlayCard;
 
 
@@ -78,8 +77,11 @@ public class SingleAnswerPanel extends BasePanel {
             public void actionPerformed(ActionEvent e) {
                 String selectedBtnText = getSelectedButtonText(optionsGroup);
                 if (selectedBtnText != null) {
-
                     System.out.println("answer is: " + selectedBtnText);
+                    if (selectedBtnText.equals(singleAnswerPlayCard.getAnswer())) {
+                        System.out.println("correct Answer");
+                        addScore(1);
+                    }
                     ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
                 }
                 else {

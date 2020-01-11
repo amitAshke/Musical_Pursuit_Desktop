@@ -11,22 +11,22 @@ import com.company.gui.bar.ShowAnswerBarBuilder;
 import com.company.gui.bar.ToolbarBuilder;
 import com.company.gui.bar.ToolbarEngineer;
 import com.company.gui.panels.AssociationPanel;
+import com.company.gui.panels.BasePanel;
 import com.company.gui.panels.MultipleChoicePanel;
 import com.company.gui.panels.SingleAnswerPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Iterator;
 
 public class GameWindow extends JFrame {
 
-    final static int WIDTH = 700;
-    final static int HEIGHT = 700;
+    private final static int WIDTH = 700;
+    private final static int HEIGHT = 700;
 
     private Player player;
     private Round round;
-    private JPanel questionPanel;
+    private BasePanel questionPanel;
     private CommandExecutor executor;
     private ToolbarEngineer toolbarEngineer;
     private Iterator<IPlayCard> roundIterator;
@@ -54,8 +54,11 @@ public class GameWindow extends JFrame {
         if(roundIterator.hasNext()) {
             IPlayCard playCard = roundIterator.next();
             questionPanel = getPanelByPlayCard(playCard);
-            if (questionPanel != null)
+            if (questionPanel != null) {
+                questionPanel.addObserver(player);
                 add(questionPanel, BorderLayout.CENTER);
+            }
+
         }
     }
 
@@ -66,6 +69,7 @@ public class GameWindow extends JFrame {
             questionPanel = getPanelByPlayCard(playCard);
             if (questionPanel != null) {
                 add(questionPanel, BorderLayout.CENTER);
+                questionPanel.addObserver(player);
                 //make sure it will draw the new panel
                 this.validate();
                 this.repaint();
@@ -86,7 +90,7 @@ public class GameWindow extends JFrame {
         return roundIterator;
     }
 
-    private JPanel getPanelByPlayCard(IPlayCard playCard) {
+    private BasePanel getPanelByPlayCard(IPlayCard playCard) {
         if (playCard instanceof AssociationPlayCard) {
             return questionPanel = new AssociationPanel((AssociationPlayCard) playCard);
         } else if (playCard instanceof SingleAnswerPlayCard) {
