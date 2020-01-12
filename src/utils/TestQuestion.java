@@ -1,4 +1,4 @@
-package com.company;
+package utils;
 
 import com.company.PlayCardPackage.AssociationPlayCard;
 import com.company.PlayCardPackage.IPlayCard;

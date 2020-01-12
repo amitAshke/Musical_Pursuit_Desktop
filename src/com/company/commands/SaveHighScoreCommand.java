@@ -18,8 +18,15 @@ public class SaveHighScoreCommand extends Command {
         this.player = player;
     }
 
+    public SaveHighScoreCommand() {
+        super(false); // not admin command
+        this.highScore = 0;
+        this.player = null;
+    }
+
     @Override
     public void execute() {
+        System.out.println("Showing high Score window");
         //load or create the high score table
         HighScoresTable table;
         try {
@@ -29,7 +36,7 @@ public class SaveHighScoreCommand extends Command {
             e.printStackTrace(System.err);
             return;
         }
-        if (highScore > 0) {
+        if (highScore > 0 && player != null) {
             int rank = table.getRank(highScore);
             if (rank <= HighScoresTable.MAX_SIZE && rank >= 1) {
                 //enter the user name and score to the table
@@ -42,10 +49,9 @@ public class SaveHighScoreCommand extends Command {
                     System.err.println("Failed to save the high scores table");
                     e.printStackTrace();
                 }
+            }
         }
-
-            //create new window of high score
-            new HighScoreWindow(table);
-        }
+        //create new window of high score
+        new HighScoreWindow(table);
     }
 }
