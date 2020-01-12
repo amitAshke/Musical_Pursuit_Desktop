@@ -31,6 +31,7 @@ public class GameWindow extends JFrame {
     private CommandExecutor executor;
     private ToolbarEngineer toolbarEngineer;
     private Iterator<IPlayCard> roundIterator;
+    private StringBuilder answerBuilder;
 
     public GameWindow(Player player, CommandExecutor executor, Round round) {
         super("Musical Pursuit");
@@ -40,9 +41,10 @@ public class GameWindow extends JFrame {
         this.toolbarEngineer = new ToolbarEngineer();
         this.round = round;
         this.roundIterator = round.iterator();
+        this.answerBuilder = new StringBuilder();
 
         //create answer ToolBar using builder
-        ToolbarBuilder barBuilder = new ShowAnswerBarBuilder(this.executor);
+        ToolbarBuilder barBuilder = new ShowAnswerBarBuilder(this.executor, answerBuilder);
         toolbarEngineer.setToolBarBuilder(barBuilder);
         toolbarEngineer.constructToolBar();
         add(toolbarEngineer.getToolBar(), BorderLayout.NORTH);
@@ -93,11 +95,18 @@ public class GameWindow extends JFrame {
     }
 
     private BasePanel getPanelByPlayCard(IPlayCard playCard) {
+
+        this.answerBuilder.delete(0, answerBuilder.toString().length());// reset the answerBuilder
         if (playCard instanceof AssociationPlayCard) {
+            this.answerBuilder.append(((AssociationPlayCard) playCard).getAnswer());
             return questionPanel = new AssociationPanel((AssociationPlayCard) playCard);
         } else if (playCard instanceof SingleAnswerPlayCard) {
+            this.answerBuilder.append(((SingleAnswerPlayCard) playCard).getAnswer());
             return questionPanel = new SingleAnswerPanel((SingleAnswerPlayCard) playCard);
         } else if (playCard instanceof MultipleChoicePlayCard) {
+            for (String s : ((MultipleChoicePlayCard) playCard).getCorrectAnswers()) {
+                this.answerBuilder.append(s).append(", ");
+            }
             return questionPanel = new MultipleChoicePanel((MultipleChoicePlayCard) playCard);
         }
         return null;

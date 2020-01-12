@@ -1,6 +1,9 @@
 package com.company.PlayCardPackage;
 
+import javafx.util.Pair;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class AssociationPlayCard implements IPlayCard{
 
@@ -27,5 +30,13 @@ public class AssociationPlayCard implements IPlayCard{
 
     public HashMap<String, Integer> getAssociations() {
         return associates;
+    }
+
+    public String getAnswer() {
+        StringBuilder ans = new StringBuilder();
+        for (Map.Entry<String, Integer> entry : associates.entrySet()) {
+           ans.append(entry.getKey()).append(":  ").append(bandsOptions[entry.getValue()]).append("\n");
+        }
+        return ans.toString();
     }
 }
