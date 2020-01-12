@@ -1,8 +1,10 @@
 package com.company;
 
 import com.company.gui.MainMenu;
+import utils.ChangeUIFont;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
@@ -12,9 +14,11 @@ public class Main {
 
             @Override
             public void run() {
+                ChangeUIFont.setUIFont (new javax.swing.plaf.FontUIResource("Ariel", Font.ITALIC,16));
                 MainMenu menu = new MainMenu();
             }
         }));
 
     }
+
 }

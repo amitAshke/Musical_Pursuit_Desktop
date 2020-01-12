@@ -7,6 +7,7 @@ import com.company.PlayCardPackage.SingleAnswerPlayCard;
 import com.company.Player;
 import com.company.Round;
 import com.company.commands.CommandExecutor;
+import com.company.commands.SaveHighScoreCommand;
 import com.company.gui.bar.ShowAnswerBarBuilder;
 import com.company.gui.bar.ToolbarBuilder;
 import com.company.gui.bar.ToolbarEngineer;
@@ -84,6 +85,7 @@ public class GameWindow extends JFrame {
         System.out.println("end of game, score is " + player.getScore());
         this.dispose();
         new MainMenu();
+        executor.runCommand(new SaveHighScoreCommand(player));
     }
 
     public Iterator<IPlayCard> getRoundIterator() {

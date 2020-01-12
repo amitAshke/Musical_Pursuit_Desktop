@@ -1,19 +1,17 @@
 package com.company.gui.panels;
 import com.company.Player;
 import com.company.Round;
-import com.company.TestQuestion;
+import utils.TestQuestion;
 import com.company.commands.CommandExecutor;
 import com.company.commands.CommandExecutorProxy;
 import com.company.gui.GameWindow;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 
 public class NewGamePanel extends BasePanel implements ActionListener {

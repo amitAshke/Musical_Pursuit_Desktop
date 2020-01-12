@@ -1,6 +1,7 @@
 package com.company.gui.bar;
 
 import com.company.commands.CommandExecutor;
+import com.company.commands.SaveHighScoreCommand;
 import com.company.commands.SimpleCommand;
 
 public class HighScoreBarBuilder extends ToolbarBuilder {
@@ -13,7 +14,6 @@ public class HighScoreBarBuilder extends ToolbarBuilder {
 
     @Override
     public void buildCommand() {
-        // todo: change to highScoreCommand
-        toolbar.setBtnCommand(new SimpleCommand());
+        toolbar.setBtnCommand(new SaveHighScoreCommand());
     }
 }

@@ -12,7 +12,7 @@ public class HighScoresTable implements Serializable {
     private int size;
     private List<ScoreInfo> highScoresList;
     public static final String SCORE_TABLE_NAME = "highscores";
-    public static final int MAX_SIZE = 5;
+    public static final int MAX_SIZE = 10;
 
     /**
      * Create an empty high-scores table with the specified size.
