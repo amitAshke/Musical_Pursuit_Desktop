@@ -1,33 +1,43 @@
-package org.musical_pursuit.services.src.FactoryPackage;
+package com.company.Factories;
 
 import java.util.HashMap;
-import org.musical_pursuit.services.src.PlayCardPackage.IPlayCard;
+import com.company.PlayCards.IPlayCard;
+import com.company.db.JDBC;
 
 public class AssociationPlayCardFactory implements IPlayCardFactory{
+
+    JDBC jdbc;
+    int associablesNum = 30;
+
+
+    public AssociationPlayCardFactory(JDBC jdbc) {
+        this.jdbc = jdbc;
+    }
 
     @Override
     public IPlayCard CreatePlayCard() {
 
-        /* Calling a function that build a query to send to the local database and receive 2 artists/bands. Lets call
-        the return object "databaseOptions". These 2 "row" objects will only contain the name of artist/band that are
-        used as the options. */
-
-        /* Calling a function that build a query with the previously received artist/band to send to the local database
-        and receive 30 song/album. Lets call the return object "databaseAssociables". These 30 "row" objects will
-        only contain the name of song/album and the name of the artist/band that they belong to. */
+//        List<Song> databaseAssociables = jdbc.getBandSongs(associablesNum);
 
         String[] options = new String[2];
-        HashMap<String, Integer> associables = new HashMap<>(30);
+        HashMap<String, Integer> associables = new HashMap<>(associablesNum);
 
-//        for (int i = 0; i < options.length; ++i) {
-//            options[i] = databaseOptions[i].artist/band;
+//        options[0] = databaseAssociables.get(0).getArtist().getArtistName();
+//        for (int i = 1; i < databaseAssociables.size(); ++i) {
+//            String artistName = databaseAssociables.get(i).getArtist().getArtistName();
+//            if (!artistName.equals(options[0])) {
+//                options[1] = artistName;
+//                break;
+//            }
 //        }
 
-//        for (int i = 0; i < incorrectAnswers.length; ++i) {
-//            if (databaseAssociables[i].artist.equals(options[0]) {
-//                    associables.put(databaseAssociables[i].song, 0);
+//        for (int i = 0; i < databaseAssociables.size; ++i) {
+//          String songName = databaseAssociables.get(i).getTitle();
+//          String artistName = databaseAssociables.get(i).getArtist().getArtistName();
+//            if (artistName.equals(options[0]) {
+//                    associables.put(songName, 0);
 //            } else {
-//                    associables.put(databaseAssociables[i].song, 1);
+//                    associables.put(SongName, 1);
 //            }
 //        }
 
