@@ -9,7 +9,7 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
-        //run the hui on swing thread
+        //run the gui on swing thread
         SwingUtilities.invokeLater((new Runnable() {
 
             @Override

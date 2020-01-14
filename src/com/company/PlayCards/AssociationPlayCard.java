@@ -1,5 +1,7 @@
 package com.company.PlayCards;
 
+import com.company.gui.panels.AssociationPanel;
+import com.company.gui.panels.BasePanel;
 import javafx.util.Pair;
 
 import java.util.HashMap;
@@ -38,5 +40,10 @@ public class AssociationPlayCard implements IPlayCard{
            ans.append(entry.getKey()).append(":  ").append(bandsOptions[entry.getValue()]).append("\n");
         }
         return ans.toString();
+    }
+
+    @Override
+    public BasePanel getPanel() {
+        return new AssociationPanel(this);
     }
 }

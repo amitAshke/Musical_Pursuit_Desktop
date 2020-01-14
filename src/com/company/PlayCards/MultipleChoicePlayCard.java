@@ -1,5 +1,8 @@
 package com.company.PlayCards;
 
+import com.company.gui.panels.BasePanel;
+import com.company.gui.panels.MultipleChoicePanel;
+
 public class MultipleChoicePlayCard implements IPlayCard{
 
     private String question;
@@ -16,6 +19,16 @@ public class MultipleChoicePlayCard implements IPlayCard{
 
     public String getQuestion() {
         return question;
+    }
+
+    @Override
+    public String getAnswer() {
+       return String.join(", ", correctAnswers);
+    }
+
+    @Override
+    public BasePanel getPanel() {
+       return new MultipleChoicePanel(this);
     }
 
 

@@ -95,20 +95,12 @@ public class GameWindow extends JFrame {
     }
 
     private BasePanel getPanelByPlayCard(IPlayCard playCard) {
+        /**
+         * return the panel that match the playCard, and set the answer.
+         */
 
         this.answerBuilder.delete(0, answerBuilder.toString().length());// reset the answerBuilder
-        if (playCard instanceof AssociationPlayCard) {
-            this.answerBuilder.append(((AssociationPlayCard) playCard).getAnswer());
-            return questionPanel = new AssociationPanel((AssociationPlayCard) playCard);
-        } else if (playCard instanceof SingleAnswerPlayCard) {
-            this.answerBuilder.append(((SingleAnswerPlayCard) playCard).getAnswer());
-            return questionPanel = new SingleAnswerPanel((SingleAnswerPlayCard) playCard);
-        } else if (playCard instanceof MultipleChoicePlayCard) {
-            for (String s : ((MultipleChoicePlayCard) playCard).getCorrectAnswers()) {
-                this.answerBuilder.append(s).append(", ");
-            }
-            return questionPanel = new MultipleChoicePanel((MultipleChoicePlayCard) playCard);
-        }
-        return null;
+        this.answerBuilder.append(playCard.getAnswer());
+        return playCard.getPanel();
     }
 }

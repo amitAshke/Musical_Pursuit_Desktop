@@ -1,5 +1,8 @@
 package com.company.PlayCards;
 
+import com.company.gui.panels.BasePanel;
+import com.company.gui.panels.SingleAnswerPanel;
+
 public class SingleAnswerPlayCard implements IPlayCard{
 
     private String question;
@@ -19,6 +22,11 @@ public class SingleAnswerPlayCard implements IPlayCard{
 
     public String getAnswer() {
         return answer;
+    }
+
+    @Override
+    public BasePanel getPanel() {
+        return new SingleAnswerPanel(this);
     }
 
 
