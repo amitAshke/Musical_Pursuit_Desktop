@@ -3,7 +3,7 @@ package org.musical_pursuit.services.src.FactoryPackage;
 import java.util.Random;
 import org.musical_pursuit.services.src.PlayCardPackage.IPlayCard;
 
-public class MultipleChoicePlayCardQuestionFactory implements IPlayCardFactory{
+public class MultipleChoicePlayCardFactory implements IPlayCardFactory{
 
     @Override
     public IPlayCard CreatePlayCard() {

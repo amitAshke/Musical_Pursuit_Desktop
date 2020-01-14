@@ -1,6 +1,6 @@
 package com.company.gui.panels;
 
-import com.company.PlayCardPackage.AssociationPlayCard;
+import com.company.PlayCards.AssociationPlayCard;
 import com.company.gui.GameWindow;
 import javafx.util.Pair;
 

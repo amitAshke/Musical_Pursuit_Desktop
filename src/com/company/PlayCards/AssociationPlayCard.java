@@ -1,4 +1,4 @@
-package com.company.PlayCardPackage;
+package com.company.PlayCards;
 
 import javafx.util.Pair;
 

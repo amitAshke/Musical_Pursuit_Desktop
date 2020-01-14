@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 
-public class SingleAnswerQuestionPlayCardFactory implements IPlayCardFactory{
+public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
 
     @Override
     public IPlayCard CreatePlayCard() {

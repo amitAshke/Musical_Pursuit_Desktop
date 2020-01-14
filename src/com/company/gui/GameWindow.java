@@ -1,9 +1,9 @@
 package com.company.gui;
 
-import com.company.PlayCardPackage.AssociationPlayCard;
-import com.company.PlayCardPackage.IPlayCard;
-import com.company.PlayCardPackage.MultipleChoicePlayCard;
-import com.company.PlayCardPackage.SingleAnswerPlayCard;
+import com.company.PlayCards.AssociationPlayCard;
+import com.company.PlayCards.IPlayCard;
+import com.company.PlayCards.MultipleChoicePlayCard;
+import com.company.PlayCards.SingleAnswerPlayCard;
 import com.company.Player;
 import com.company.Round;
 import com.company.commands.CommandExecutor;

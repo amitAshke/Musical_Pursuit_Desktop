@@ -1,9 +1,9 @@
 package utils;
 
-import com.company.PlayCardPackage.AssociationPlayCard;
-import com.company.PlayCardPackage.IPlayCard;
-import com.company.PlayCardPackage.MultipleChoicePlayCard;
-import com.company.PlayCardPackage.SingleAnswerPlayCard;
+import com.company.PlayCards.AssociationPlayCard;
+import com.company.PlayCards.IPlayCard;
+import com.company.PlayCards.MultipleChoicePlayCard;
+import com.company.PlayCards.SingleAnswerPlayCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;

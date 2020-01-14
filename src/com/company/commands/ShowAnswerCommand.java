@@ -1,8 +1,6 @@
 package com.company.commands;
 
 
-import com.company.PlayCardPackage.IPlayCard;
-
 import javax.swing.*;
 
 public class ShowAnswerCommand extends Command {

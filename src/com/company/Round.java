@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.PlayCardPackage.IPlayCard;
+import com.company.PlayCards.IPlayCard;
 
 import java.util.Iterator;
 

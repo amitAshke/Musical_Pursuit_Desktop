@@ -1,6 +1,6 @@
 package com.company.gui.panels;
 
-import com.company.PlayCardPackage.MultipleChoicePlayCard;
+import com.company.PlayCards.MultipleChoicePlayCard;
 import com.company.gui.GameWindow;
 
 import javax.swing.*;
