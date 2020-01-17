@@ -20,9 +20,7 @@ public class BasePanel extends JPanel implements Observable {
         // set the size of the formPanel
         dim.width = 250;
         setPreferredSize(dim);
-        /* each graphic element can have a border, with setBorder. In this case, the
-         * static method compoundBorder takes two border objects as parameters
-         */
+
         Border innerBorder = BorderFactory.createTitledBorder(panelName);
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));

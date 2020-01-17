@@ -58,7 +58,7 @@ public class GameWindow extends JFrame {
             IPlayCard playCard = roundIterator.next();
             questionPanel = getPanelByPlayCard(playCard);
             if (questionPanel != null) {
-                questionPanel.addObserver(player);
+                questionPanel.addObserver(player); // player register to get score update from the panel
                 add(questionPanel, BorderLayout.CENTER);
             }
 
@@ -66,13 +66,16 @@ public class GameWindow extends JFrame {
     }
 
     public void callNextQuestion() {
+        /**
+         * call the next question by iterate the round iterator, and display the right panel/
+         */
         remove(this.questionPanel);
         if(roundIterator.hasNext()) {
             IPlayCard playCard = roundIterator.next();
             questionPanel = getPanelByPlayCard(playCard);
             if (questionPanel != null) {
                 add(questionPanel, BorderLayout.CENTER);
-                questionPanel.addObserver(player);
+                questionPanel.addObserver(player); // player register to get score update from the panel
                 //make sure it will draw the new panel
                 this.validate();
                 this.repaint();
@@ -84,6 +87,9 @@ public class GameWindow extends JFrame {
     }
 
     private void endSequence() {
+        /**
+         * the end sequence to call when the iterator does not have next.
+         */
         System.out.println("end of game, score is " + player.getScore());
         this.dispose();
         new MainMenu();

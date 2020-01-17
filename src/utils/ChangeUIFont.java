@@ -5,6 +5,9 @@ import javax.swing.*;
 public class ChangeUIFont
 {
     public static void setUIFont (javax.swing.plaf.FontUIResource f){
+        /**
+         * change the font all element in the program
+         */
         java.util.Enumeration keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
