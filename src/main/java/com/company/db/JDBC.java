@@ -2,10 +2,12 @@ package com.company.db;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import com.company.objects.Artist;
 import com.company.objects.Song;
 import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
@@ -121,13 +123,116 @@ public class JDBC {
      * @return: HashMap with list of right answers as song objects (and key 1 e.g.)
      *  and list of wrong answers as song objects (and key 0 e.g.)
      */
-    public HashMap<Integer, List<Song>> getSongsDtl(int context, int about, int correctAmount, int wrongAmount ) {
+    public HashMap<Integer, List<Song>> getSongsDtl(int correctAmount, int wrongAmount ) {
 
-        // Question: Which band composed the song "yesterday"?
-        // context = song name = "yesterday"
-        // about = band = "beatles"
+        HashMap<Integer, List<Song>> answers = new HashMap<>();
+        List<Song> right = new ArrayList<>();
+        List<Song> wrong = new ArrayList<>();
+        String corr = Integer.toString(correctAmount);
+        String wron = Integer.toString(wrongAmount);
+        String artist_id, title, song_id, getRightAns, getWrongAns, artist_name = null;
+        int year;
+        ResultSet rs, rs1;
+        StringBuilder notRightOnes = new StringBuilder();
 
-        return null;
+        //create statement
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            //get right answers
+            try {
+                //Statement stmt = this.conn.createStatement();
+
+                for (int i = 0; i < correctAmount; i++) {
+                    //clear db by dropping schema and creating again the db
+                    getRightAns = "SELECT * " +
+                            "FROM  `songs` " +
+                            "ORDER BY RAND() " +
+                            "LIMIT 1";
+
+                    rs = stmt.executeQuery(getRightAns);
+
+                    if (rs.next()) {
+                        song_id = rs.getString("song_id");
+                        year = rs.getInt("year");
+                        title = rs.getString("title");
+                        artist_id = rs.getString("artist_id");
+
+                        getRightAns = "SELECT  `name` " +
+                                "FROM  `artists` " +
+                                "WHERE `id`='" + artist_id + "'";
+                        rs1 = stmt.executeQuery(getRightAns);
+
+                        if (rs1.next()) {
+                            artist_name = rs1.getString("name");
+                        }
+
+                        right.add(new Song(song_id, title, year, new Artist(artist_id, artist_name)));
+                    }
+                }
+
+                //add to HashMap right answers
+                answers.put(0, right);
+
+            } catch (SQLException se) {
+                //Handle errors for JDBC
+                se.printStackTrace();
+            }
+
+            //get wrong ones
+            try {
+                notRightOnes.append("`title`= '" + right.get(0).getTitle() + "'");
+
+                //Statement stmt = this.conn.createStatement();
+                for (int n = 1; n < right.size(); n++) {
+                    title = (right.get(n).getTitle());
+                    notRightOnes.append(" OR `title`= '" + title + "'");
+                }
+
+                for (int j = 0; j < wrongAmount; j++) {
+                    //clear db by dropping schema and creating again the db
+                    getWrongAns = "SELECT * " +
+                            "FROM  `songs` " +
+                            "WHERE NOT (" + notRightOnes + ") " +
+                            "ORDER BY RAND() " +
+                            "LIMIT 1";
+
+                    rs = stmt.executeQuery(getWrongAns);
+
+                    if (rs.next()) {
+                        song_id = rs.getString("song_id");
+                        year = rs.getInt("year");
+                        title = rs.getString("title");
+                        artist_id = rs.getString("artist_id");
+
+                        getWrongAns = "SELECT  `name` " +
+                                "FROM  `artists` " +
+                                "WHERE `id`='" + artist_id + "'";
+                        rs1 = stmt.executeQuery(getWrongAns);
+
+                        if (rs1.next()) {
+                            artist_name = rs1.getString("name");
+                        }
+
+                        wrong.add(new Song(song_id, title, year, new Artist(artist_id, artist_name)));
+                    }
+                }
+
+                //add to HashMap wrong answers
+                answers.put(1, wrong);
+
+            } catch (SQLException se) {
+                //Handle errors for JDBC
+                se.printStackTrace();
+            }
+
+            //catch of failed create statement
+        } catch (NullPointerException | SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }
+
+        return answers;
     }
 
     /*
