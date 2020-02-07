@@ -2,6 +2,7 @@ package com.company.gui.panels;
 
 import com.company.PlayCards.SingleAnswerPlayCard;
 import com.company.gui.GameWindow;
+import com.company.gui.Toast;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.concurrent.TimeUnit;
 
 public class SingleAnswerPanel extends BasePanel {
     private JLabel questionLabel;
@@ -79,8 +81,14 @@ public class SingleAnswerPanel extends BasePanel {
                 if (selectedBtnText != null) {
                     System.out.println("answer is: " + selectedBtnText);
                     if (selectedBtnText.equals(singleAnswerPlayCard.getAnswer())) {
-                        System.out.println("correct Answer");
+                        Toast t = new Toast("correct Answer", 180, 580);
+                        t.showtoast();
                         addScore(1);
+                    } else {
+                        // create a toast message
+                        Toast t = new Toast("wrong Answer", 180, 580);
+                        t.showtoast();
+
                     }
                     ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();
                 }

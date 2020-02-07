@@ -2,6 +2,7 @@ package com.company.gui.panels;
 
 import com.company.PlayCards.MultipleChoicePlayCard;
 import com.company.gui.GameWindow;
+import com.company.gui.Toast;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,13 +96,19 @@ public class MultipleChoicePanel extends BasePanel {
                                 break;
                             }
                         }
-                        if (isCorrect)
+                        if (isCorrect) {
                             score += 1;
-                        else
+                        }
+
+                        else {
                             score -= 1;
+                        }
+
                     }
                     if (score > 0) {
                         addScore(score);
+                        Toast t = new Toast("correct Answer", 180, 580);
+                        t.showtoast();
                     }
 
                     ((GameWindow)javax.swing.FocusManager.getCurrentManager().getActiveWindow()).callNextQuestion();

@@ -2,6 +2,7 @@ package com.company.gui.panels;
 
 import com.company.PlayCards.AssociationPlayCard;
 import com.company.gui.GameWindow;
+import com.company.gui.Toast;
 import javafx.util.Pair;
 
 import javax.swing.*;
@@ -50,9 +51,13 @@ public class AssociationPanel extends BasePanel implements ActionListener {
         // key is correct answer, value is user
         if (correctAnswerUserAnswer.getKey().equals(correctAnswerUserAnswer.getValue())) {
             System.out.println("well done! :)");
+            Toast t = new Toast("correct Answer", 180, 580);
+            t.showtoast();
             addScore(1);
         } else {
             System.out.println("incorrect :(");
+            Toast t = new Toast("wrong Answer", 180, 580);
+            t.showtoast();
         }
 
         if (it.hasNext()) {
