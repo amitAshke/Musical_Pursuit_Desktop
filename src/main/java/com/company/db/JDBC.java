@@ -26,6 +26,15 @@ public class JDBC {
      */
     public JDBC() {
         this.conn = null;
+        //open connection on construction
+        while(this.conn == null){
+            try {
+                this.openConnection("");
+//                this.openConnection("C:\\Users\\User\\Desktop\\application.properties");
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     /**
@@ -34,39 +43,46 @@ public class JDBC {
     /*TODO: here config file connection details*/
     public Connection openConnection(String configFileName /*"src/main/resources/application.properties"*/) {
 
-        String host = "";
-        String port = "";
-        String schema = "";
-        String user = "";
-        String password = "";
+        String host = "127.0.0.1";
+        String port = "3306";
+        String schema = "musical_pursuit";
+        String user = "root";
+        String password = "1234567890";
 
         System.out.print("Trying to connect... ");
 
-        try (InputStream input = new FileInputStream(configFileName)) {
-
-            Properties prop = new Properties();
-
-            // load a properties file
-            prop.load(input);
-
-            // creating the connection. Parameters should be taken from config file.
-            host = prop.getProperty("host").toString();
-            port = prop.getProperty("port").toString();
-            schema = prop.getProperty("schema").toString();
-            user = prop.getProperty("user").toString();
-            password = prop.getProperty("password").toString();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            //TODO: end program...
-        }
+//        try (InputStream input = new FileInputStream(configFileName)) {
+//
+//            Properties prop = new Properties();
+//
+//            // load a properties file
+//            prop.load(input);
+//
+//            // creating the connection. Parameters should be taken from config file.
+//            host = prop.getProperty("host").toString();
+//            port = prop.getProperty("port").toString();
+//            schema = prop.getProperty("schema").toString();
+//            user = prop.getProperty("user").toString();
+//            password = prop.getProperty("password").toString();
+//
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            //TODO: end program...
+//        }
 
         try {
+            Class driver_class = Class.forName("com.mysql.cj.jdbc.Driver");
+            Driver driver = (Driver) driver_class.newInstance();
+            DriverManager.registerDriver(driver);
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema
-                    + "?serverTimezone=UTC", user, password);
-        } catch (SQLException e) {
+                    /*+ "?serverTimezone=UTC"*/, user, password);
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Unable to connect - " + e.getMessage());
             return null;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
         System.out.println("Connected!");
         return this.conn;
