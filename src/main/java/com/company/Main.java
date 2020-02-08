@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.gui.MainMenu;
-import utils.ChangeUIFont;
+import com.company.utils.ChangeUIFont;
 
 import javax.swing.*;
 import java.awt.*;

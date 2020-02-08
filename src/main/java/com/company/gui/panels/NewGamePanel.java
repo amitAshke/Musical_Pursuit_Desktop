@@ -1,7 +1,7 @@
 package com.company.gui.panels;
 import com.company.Player;
 import com.company.Round;
-import utils.TestQuestion;
+import com.company.utils.TestQuestion;
 import com.company.commands.CommandExecutor;
 import com.company.commands.CommandExecutorProxy;
 import com.company.gui.GameWindow;
