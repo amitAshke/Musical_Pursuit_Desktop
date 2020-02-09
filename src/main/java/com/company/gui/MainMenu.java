@@ -1,8 +1,10 @@
 package com.company.gui;
 
 import com.company.Player;
+import com.company.Round;
 import com.company.commands.CommandExecutor;
 import com.company.commands.CommandExecutorProxy;
+import com.company.db.JDBC;
 import com.company.gui.bar.*;
 import com.company.gui.panels.NewGamePanel;
 
@@ -19,7 +21,7 @@ public class MainMenu extends JFrame {
     private CommandExecutor executor;
     private Player player;
 
-    public MainMenu() {
+    public MainMenu(JDBC jdbc) {
         super("Musical Pursuit");
         this.toolbarEngineer = new ToolbarEngineer();
         this.executor = new CommandExecutorProxy(); // default executorProxy
@@ -31,7 +33,8 @@ public class MainMenu extends JFrame {
         toolbarEngineer.setToolBarBuilder(barBuilder);
         toolbarEngineer.constructToolBar();
         toolbar = this.toolbarEngineer.getToolBar();
-        newGamePanel = new NewGamePanel(player);
+        //todo: Amit create round and pass round
+        newGamePanel = new NewGamePanel(player, getRound(jdbc));
         newGamePanel.setCommandExecutorProxy(this.executor);
 
 
@@ -42,5 +45,12 @@ public class MainMenu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
+
+
     }
+
+    public Round getRound(JDBC jdbc){
+        return null;
+    }
+
 }

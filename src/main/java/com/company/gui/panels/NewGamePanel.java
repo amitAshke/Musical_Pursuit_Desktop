@@ -21,11 +21,13 @@ public class NewGamePanel extends BasePanel implements ActionListener {
     private JTextField nameField;
     private JButton okBtn;
     private Player player;
+    private Round round;
     private CommandExecutor commandExecutorProxy;
 
-    public NewGamePanel(Player player) {
+    public NewGamePanel(Player player, Round round) {
         super("New Player");
         this.player = player;
+        this.round = round;
 
         nameLabel = new JLabel("Name: ");
 //        occupationLabel = new JLabel("Occupation: ");
@@ -97,8 +99,8 @@ public class NewGamePanel extends BasePanel implements ActionListener {
                 //closing the window and opening a game window
                 JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 topFrame.setVisible(false);
-                // todo: create a round from question from dataBase.
-                new GameWindow(player, commandExecutorProxy, new Round(TestQuestion.getFakeQuestions()));
+                // todo: pass round to new gameWindow
+                new GameWindow(player, commandExecutorProxy, round);
                 topFrame.dispose();
             }
 

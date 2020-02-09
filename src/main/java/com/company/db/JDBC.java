@@ -75,7 +75,7 @@ public class JDBC {
             Driver driver = (Driver) driver_class.newInstance();
             DriverManager.registerDriver(driver);
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema
-                    /*+ "?serverTimezone=UTC"*/, user, password);
+                    + "?serverTimezone=UTC", user, password);
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Unable to connect - " + e.getMessage());
             return null;
