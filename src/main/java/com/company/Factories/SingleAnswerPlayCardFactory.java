@@ -57,7 +57,7 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
 
                 // The question is about an artist.
                 case 1:
-                    question = "Which of the following artists has released the song " + correctSong.getTitle() + " in " + String.valueOf(correctSong.getYear()) + "?";
+                    question = "Which of the following artists has released the song \"" + correctSong.getTitle() + "\" in " + String.valueOf(correctSong.getYear()) + "?";
                     try {
                         correctAnswer = correctArtist.getArtistName();
                     } catch (NullPointerException e) {

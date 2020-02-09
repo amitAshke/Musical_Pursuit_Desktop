@@ -1,5 +1,8 @@
 package com.company.gui;
 
+import com.company.Factories.MultipleChoicePlayCardFactory;
+import com.company.Factories.SingleAnswerPlayCardFactory;
+import com.company.PlayCards.IPlayCard;
 import com.company.Player;
 import com.company.Round;
 import com.company.commands.CommandExecutor;
@@ -11,9 +14,12 @@ import com.company.gui.panels.NewGamePanel;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class MainMenu extends JFrame {
     final static int WIDTH = 700;
     final static int HEIGHT = 700;
+    final static int SINGLE_ANSWER_PLAYCARDS = 5;
+//    final static int MULTIPLE_ANSWER_PLAYCARDS = 2;
 
     private Toolbar toolbar;
     private NewGamePanel newGamePanel;
@@ -50,7 +56,20 @@ public class MainMenu extends JFrame {
     }
 
     public Round getRound(JDBC jdbc){
-        return null;
+//        IPlayCard[] playCards = new IPlayCard[SINGLE_ANSWER_PLAYCARDS + MULTIPLE_ANSWER_PLAYCARDS];
+        IPlayCard[] playCards = new IPlayCard[SINGLE_ANSWER_PLAYCARDS];
+        SingleAnswerPlayCardFactory singleAnswerPlayCardFactory = new SingleAnswerPlayCardFactory(jdbc);
+        MultipleChoicePlayCardFactory multipleChoicePlayCardFactory = new MultipleChoicePlayCardFactory(jdbc);
+
+        for(int i = 0; i < SINGLE_ANSWER_PLAYCARDS; ++i) {
+            playCards[i] = singleAnswerPlayCardFactory.CreatePlayCard();
+        }
+
+//        for(int i = 0; i < MULTIPLE_ANSWER_PLAYCARDS; ++i) {
+//            playCards[SINGLE_ANSWER_PLAYCARDS + i] = multipleChoicePlayCardFactory.CreatePlayCard();
+//        }
+
+        return new Round(playCards);
     }
 
 }

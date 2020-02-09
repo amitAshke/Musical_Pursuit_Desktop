@@ -10,8 +10,8 @@ import com.company.objects.Song;
 public class MultipleChoicePlayCardFactory implements IPlayCardFactory{
 
     JDBC jdbc;
-    int correctAnswersNum = 8; //Must be more than 1 to make sense;
-    int incorrectAnswersNum = 8; //Must be at least as much as "correctAnswersNum" for decent difficulty.
+    int correctAnswersNum = 2; //Must be more than 1 to make sense;
+    int incorrectAnswersNum = 4; //Must be at least as much as "correctAnswersNum" for decent difficulty.
 
 
     public MultipleChoicePlayCardFactory(JDBC jdbc) {
