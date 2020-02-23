@@ -163,6 +163,7 @@ public class JDBC {
                     //clear db by dropping schema and creating again the db
                     getRightAns = "SELECT * " +
                             "FROM  `songs` " +
+                            "WHERE `title`<>'' AND `title` IS NOT NULL  AND `title` NOT LIKE `%\\%`" +
                             "ORDER BY RAND() " +
                             "LIMIT 1";
 
@@ -176,7 +177,7 @@ public class JDBC {
 
                         getRightAns = "SELECT  `name` " +
                                 "FROM  `artists` " +
-                                "WHERE `id`='" + artist_id + "'";
+                                "WHERE `id`=`" + artist_id + "`";
                         rs1 = stmt.executeQuery(getRightAns);
 
                         if (rs1.next()) {
