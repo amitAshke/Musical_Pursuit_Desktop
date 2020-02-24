@@ -177,7 +177,7 @@ public class JDBC {
 
                         getRightAns = "SELECT  `name` " +
                                 "FROM  `artists` " +
-                                "WHERE `id`=`" + artist_id + "`";
+                                "WHERE `id`='" + artist_id + "'";
                         rs1 = stmt.executeQuery(getRightAns);
 
                         if (rs1.next()) {
