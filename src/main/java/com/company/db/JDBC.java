@@ -163,7 +163,7 @@ public class JDBC {
                     //clear db by dropping schema and creating again the db
                     getRightAns = "SELECT * " +
                             "FROM  `songs` " +
-                            "WHERE `title`<>'' AND `title` IS NOT NULL  AND `title` NOT LIKE `%\\%`" +
+                            "WHERE `title`<>'' AND `title` IS NOT NULL " +
                             "ORDER BY RAND() " +
                             "LIMIT 1";
 
