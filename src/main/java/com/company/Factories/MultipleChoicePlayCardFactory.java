@@ -43,9 +43,12 @@ public class MultipleChoicePlayCardFactory implements IPlayCardFactory{
             for (int i = 0; i < correctAnswersNum; ++i) {
                 try {
                     correctAnswers[i] = correctSongs.get(i).getTitle();
+                    if (correctAnswers[i].equals("")) {
+                        restartLoop = true;
+                    }
                 } catch (NullPointerException e) {
                     restartLoop = true;
-                    System.out.println("null correct song title");
+                    System.out.println("Empty correct song title");
                     break;
                 }
             }
@@ -57,6 +60,10 @@ public class MultipleChoicePlayCardFactory implements IPlayCardFactory{
             for (int i = 0; i < incorrectAnswersNum; ++i) {
                 try {
                     incorrectAnswers[i] = incorrectSongs.get(i).getTitle();
+                    if (incorrectAnswers[i].equals("")) {
+                        restartLoop = true;
+                        System.out.println("Empty incorrect song title");
+                    }
                 } catch (NullPointerException e) {
                     restartLoop = true;
                     System.out.println("null incorrect song title");

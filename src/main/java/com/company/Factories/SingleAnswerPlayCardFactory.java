@@ -50,6 +50,10 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                     question = "Which of the following songs was released by " + correctArtist.getArtistName() + " in " + String.valueOf(correctSong.getYear()) + "?";
                     try {
                         correctAnswer = correctSong.getTitle();
+                        if (correctAnswer.equals("")) {
+                            System.out.println("Empty correct song title");
+                            continue;
+                        }
                     } catch (NullPointerException e) {
                         continue;
                     }
@@ -60,6 +64,10 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                     question = "Which of the following artists has released the song \"" + correctSong.getTitle() + "\" in " + String.valueOf(correctSong.getYear()) + "?";
                     try {
                         correctAnswer = correctArtist.getArtistName();
+                        if (correctAnswer.equals("")) {
+                            System.out.println("Empty correct song title");
+                            continue;
+                        }
                     } catch (NullPointerException e) {
                         continue;
                     }
@@ -83,6 +91,10 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                         }
                         try {
                             options[i] = incorrect.get(i).getTitle();
+                            if (options[i].equals("")) {
+                                restartLoop = true;
+                                System.out.println("Empty incorrect song title");
+                            }
                         } catch (NullPointerException e) {
                             restartLoop = true;
                             break;
@@ -100,6 +112,10 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                         }
                         try {
                             options[i] = incorrect.get(i).getArtist().getArtistName();
+                            if (options[i].equals("")) {
+                                restartLoop = true;
+                                System.out.println("Empty incorrect song title");
+                            }
                         } catch (NullPointerException e) {
                             restartLoop = true;
                             break;
