@@ -87,6 +87,7 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                 case 0:
                     for (int i = 0; i < totalOptionsNum - 1; ++i) {
                         if (i == correctPosition) {
+                            options[i] = correctAnswer;
                             continue;
                         }
                         try {
@@ -108,6 +109,7 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                 case 1:
                     for (int i = 0; i < totalOptionsNum - 1; ++i) {
                         if (i == correctPosition) {
+                            options[i] = correctAnswer;
                             continue;
                         }
                         try {
