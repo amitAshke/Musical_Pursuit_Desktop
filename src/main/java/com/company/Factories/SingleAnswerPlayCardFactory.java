@@ -41,6 +41,7 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
             Song correctSong = answers.get(0).get(0);
             Artist correctArtist = correctSong.getArtist();
             List<Song> incorrect = answers.get(1);
+            int incorrectIndex = 0;
 
             // build the question and gets the correct answer based on what the question is about.
             switch (about) {
@@ -80,18 +81,17 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                     System.out.println("Something is wrong with 'about'");
             }
 
-            options[correctPosition] = correctAnswer;
-
             switch (about) {
 
                 case 0:
-                    for (int i = 0; i < totalOptionsNum - 1; ++i) {
+                    for (int i = 0; i < totalOptionsNum; ++i) {
                         if (i == correctPosition) {
                             options[i] = correctAnswer;
                             continue;
                         }
                         try {
-                            options[i] = incorrect.get(i).getTitle();
+                            options[i] = incorrect.get(incorrectIndex).getTitle();
+                            ++incorrectIndex;
                             if (options[i].equals("")) {
                                 restartLoop = true;
                                 System.out.println("Empty incorrect song title");
@@ -107,13 +107,14 @@ public class SingleAnswerPlayCardFactory implements IPlayCardFactory{
                     break;
 
                 case 1:
-                    for (int i = 0; i < totalOptionsNum - 1; ++i) {
+                    for (int i = 0; i < totalOptionsNum; ++i) {
                         if (i == correctPosition) {
                             options[i] = correctAnswer;
                             continue;
                         }
                         try {
-                            options[i] = incorrect.get(i).getArtist().getArtistName();
+                            options[i] = incorrect.get(incorrectIndex).getArtist().getArtistName();
+                            ++incorrectIndex;
                             if (options[i].equals("")) {
                                 restartLoop = true;
                                 System.out.println("Empty incorrect song title");
