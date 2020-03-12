@@ -1,16 +1,12 @@
 package com.company.db;
 
-import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 
 import com.company.objects.Artist;
 import com.company.objects.Song;
-import org.hsqldb.cmdline.SqlFile;
-import org.hsqldb.cmdline.SqlToolError;
 
 /**
  * this class will create our db tables and fill them in from the csv file using SQL queries.
@@ -29,8 +25,7 @@ public class JDBC {
         //open connection on construction
         while(this.conn == null){
             try {
-                this.openConnection("");
-//                this.openConnection("C:\\Users\\User\\Desktop\\application.properties");
+                this.openConnection(/*String configFileName*/);
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -40,8 +35,7 @@ public class JDBC {
     /**
      * @return true if the connection was successfully set
      */
-    /*TODO: here config file connection details*/
-    public Connection openConnection(String configFileName /*"src/main/resources/application.properties"*/) {
+    public Connection openConnection(/*String configFileName*/) {
 
         String host = "127.0.0.1";
         String port = "3306";
@@ -51,6 +45,7 @@ public class JDBC {
 
         System.out.print("Trying to connect... ");
 
+        // Used to input the database detail using a configuration file.
 //        try (InputStream input = new FileInputStream(configFileName)) {
 //
 //            Properties prop = new Properties();
@@ -67,7 +62,6 @@ public class JDBC {
 //
 //        } catch (IOException ex) {
 //            ex.printStackTrace();
-//            //TODO: end program...
 //        }
 
         try {
@@ -88,48 +82,6 @@ public class JDBC {
         return this.conn;
     }
 
-    /*Assuming db already exists, this function will create the 3 tables
-     * we need with all primary keys and foreign keys
-     */
-    public void createDB() throws IOException, SqlToolError {
-
-        SqlFile sf = new SqlFile(new File(
-                "src/main/java/com/example/dbcourse/Musical_Pursuit/db/musical_db_creator.sql"));
-        sf.setConnection(conn);
-        try {
-            sf.execute();
-        } catch (SQLException e) {
-            e.getMessage();
-        }
-    }
-
-    public void fillDBfromCSV(String csvFileName) throws IOException, SqlToolError {
-
-        int result;
-
-        //TODO: open csv file
-//        try {
-//
-//            CSVLoader loader = new CSVLoader(getCon());
-//
-//            loader.loadCSV("C:\\employee.sql", "CUSTOMER", true);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        //TODO: genereate musical_db_creator.sql
-
-        //TODO: insert with SQL queries all details from csv to db here:
-        try (Statement stmt = conn.createStatement();) {
-            result = stmt.executeUpdate("INSERT INTO (fname, lname) " + "VALUES('Emma','Stone')");
-            result = stmt.executeUpdate("INSERT INTO demo(fname, lname) " + "VALUES('Ryan','Gosling')");
-            // result = stmt.executeUpdate("DELETE FROM demo");
-            System.out.println("Success - executeUpdate, result = " + result);
-
-        } catch (SQLException e) {
-            System.out.println("ERROR executeUpdate - " + e.getMessage());
-        }
-    }
 
     /* @param context: background for the question,
      *e.g. artist of a question about who composed this song
@@ -144,8 +96,6 @@ public class JDBC {
         HashMap<Integer, List<Song>> answers = new HashMap<>();
         List<Song> right = new ArrayList<>();
         List<Song> wrong = new ArrayList<>();
-        String corr = Integer.toString(correctAmount);
-        String wron = Integer.toString(wrongAmount);
         String artist_id, title, song_id, getRightAns, getWrongAns, artist_name = null;
         int year;
         ResultSet rs, rs1;
@@ -252,13 +202,71 @@ public class JDBC {
         return answers;
     }
 
-    /*
-     * @return: List of 30 songs of 2 different bands
+    /* @param associationsAmount:
+     * @param wrongAmount:
+     * @return: HashMap with list of songs that are associated with the artist that serves as the key.
      */
-    public List<Song> getBandSongs() {
-
-        return null;
-    }
+//    public HashMap<Artist, List<Song>> getAssociations(int associationsAmount) {
+//        HashMap<Artist, List<Song>> answers = new HashMap<>();
+//        List<Song> songs = new ArrayList<>();
+//        String artist_id = "", title, song_id, getArtists, getSongs, artist_name = null;
+//        int year;
+//        ResultSet rs, rs1;
+//
+//        //create statement
+//        try {
+//            Statement stmt = this.conn.createStatement();
+//
+//            //get right answers
+//            try {
+//                //Statement stmt = this.conn.createStatement();
+//
+//                for (int i = 0; i < 2; i++) {
+//                    songs.clear();
+//
+//                    //clear db by dropping schema and creating again the db
+//                    getArtists = "SELECT * " +
+//                            "FROM  `artists` " +
+//                            "WHERE `name`<>'' AND `title` IS NOT NULL " +
+//                            "ORDER BY RAND() " +
+//                            "LIMIT 2";
+//
+//                    rs = stmt.executeQuery(getArtists);
+//
+//                    if (rs.next()) {
+//                        artist_id = rs.getString("artist_id");
+//                        artist_name = rs.getString("name");
+//
+//                        getSongs = "SELECT  `name` " +
+//                                "FROM  `songs` " +
+//                                "WHERE `ARTIST_id`='" + artist_id + "'" +
+//                                "LIMIT " + (associationsAmount / 2);
+//                        rs1 = stmt.executeQuery(getSongs);
+//
+//                        if (rs1.next()) {
+//                            song_id = rs1.getString("song_id");
+//                            year = rs1.getInt("year");
+//                            title = rs1.getString("title");
+//                            artist_id = rs1.getString("artist_id");
+//
+//                            songs.add(new Song(song_id, title, year, new Artist(artist_id, artist_name)));
+//                        }
+//                    }
+//                    //add to HashMap right answers
+//                    answers.put(new Artist(artist_id, artist_name), songs);
+//                }
+//            } catch (SQLException se) {
+//                //Handle errors for JDBC
+//                se.printStackTrace();
+//            }
+//            //catch of failed create statement
+//        } catch (NullPointerException | SQLException se) {
+//            //Handle errors for JDBC
+//            se.printStackTrace();
+//        }
+//
+//        return answers;
+//    }
 
     /**
      * close the connection

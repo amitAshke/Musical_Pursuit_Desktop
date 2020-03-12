@@ -1,8 +1,14 @@
 package com.company.Factories;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.company.PlayCards.AssociationPlayCard;
 import com.company.PlayCards.IPlayCard;
 import com.company.db.JDBC;
+import com.company.objects.Artist;
+import com.company.objects.Song;
 
 public class AssociationPlayCardFactory implements IPlayCardFactory{
 
@@ -17,32 +23,29 @@ public class AssociationPlayCardFactory implements IPlayCardFactory{
     @Override
     public IPlayCard CreatePlayCard() {
 
-//        List<Song> databaseAssociables = jdbc.getBandSongs(associablesNum);
-
         String[] options = new String[2];
-        HashMap<String, Integer> associables = new HashMap<>(associablesNum);
+        int i = 0;
+        HashMap<Song, Integer> associates = new HashMap<>();
+        List<Song> songs = new ArrayList<>();
+//        HashMap<Artist, List<Song>> associables = jdbc.getAssociations(associablesNum);
 
-//        options[0] = databaseAssociables.get(0).getArtist().getArtistName();
-//        for (int i = 1; i < databaseAssociables.size(); ++i) {
-//            String artistName = databaseAssociables.get(i).getArtist().getArtistName();
-//            if (!artistName.equals(options[0])) {
-//                options[1] = artistName;
-//                break;
-//            }
+//        for (List<Song> l: associables.values()) {
+//            songs.addAll(l);
 //        }
 
-//        for (int i = 0; i < databaseAssociables.size; ++i) {
-//          String songName = databaseAssociables.get(i).getTitle();
-//          String artistName = databaseAssociables.get(i).getArtist().getArtistName();
-//            if (artistName.equals(options[0]) {
-//                    associables.put(songName, 0);
+//        for(Artist key : associables.keySet()) {
+//            options[i] = key.getArtistName();
+//        }
+
+//        for (Song song : songs) {
+//            if (song.getArtist().getArtistName().equals(options[0])) {
+//                associates.put(song, 0);
 //            } else {
-//                    associables.put(SongName, 1);
+//                associates.put(song, 1);
 //            }
 //        }
 
-
-//        return new AssociationPlayCard(options, associables);
+//        return new AssociationPlayCard(options, associates);
         return null;
     }
 }

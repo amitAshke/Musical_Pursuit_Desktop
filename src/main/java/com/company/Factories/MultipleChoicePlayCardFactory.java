@@ -21,9 +21,7 @@ public class MultipleChoicePlayCardFactory implements IPlayCardFactory{
 
     @Override
     public IPlayCard CreatePlayCard() {
-
-        String[] options = new String[correctAnswersNum + incorrectAnswersNum];
-
+        
         while(true) {
 
             boolean restartLoop = false;
